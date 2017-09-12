@@ -23,7 +23,22 @@ function Login() {
 }
 
 
+function Login1(){
+    
+    $('#desconectar,#ingresar').click(function(){
 
+        $('#mainContainer').hide();
+        $('#copyr').hide();
+        $('#contenedor').fadeIn(1000);
+        
+    });
+
+    $('#inicio').click(function(){
+        $('#contenedor').hide();
+        $('#mainContainer').fadeIn(1000);
+        $('#copyr').fadeIn(1000);
+    });
+}
 /*
 document.getElementById("inicio").addEventListener("click", function () {
     document.getElementById("logo").innerHTML = "Hello World";
