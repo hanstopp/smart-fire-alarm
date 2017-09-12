@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" href="css/palette.css">
+		<link rel="stylesheet" href="css/mdb.css">
 		<title>FireAlarm</title>
 	</head>
 	<body>
@@ -20,10 +21,11 @@
 					</div>
 				</div>
 				<ul class="nav navbar-nav collapse navbar-collapse no-border" id="navBar">
-					<li><a onclick="ocultar()" href ="#" id="inicio">  inicio </a></li>   
+					<li><a onclick="ocultar()" href ="#" id="inicio">Inicio</a></li>   
                     <li><a href="#" id="configuracion">Configuracion</a></li>
                     <li><a href="#" id="cuenta">Cuenta</a></li>
-					<li><a onclick="Login()" href="#" id="desconectar">Desconectar</a></li>
+					<li><a onclick="Login1()" href="#" id="desconectar">Desconectar</a></li>
+					<li><a onclick="Login1()" href="#" id="ingresar">Ingresar</a></li>
                     
 				</ul>
 			</div>
@@ -34,14 +36,35 @@
 				inf
 			</p>
 		</div>
-		<div class="copyright">
+		<div id="copyr" class="copyright">
 			<p class="hCenter">&copy; 2017 FireAlert</p>
 		</div>
 
 
+		<div id="contenedor" class="div01">
+			<form action='index.php' method='post'>
+			    <p class="h5 text-center mb-4">Iniciar Sesion</p>
+			    <div class="md-form">
+			        <i class="fa fa-envelope prefix grey-text"></i>
+			        <input type="text" id="defaultForm-email" class="form-control" name='nom'  autofocus>
+			        <label for="defaultForm-email">Ingresa usuario</label>
+			    </div>
+			    <div class="md-form">
+			        <i class="fa fa-lock prefix grey-text"></i>
+			        <input type="password" id="defaultForm-pass" class="form-control" name='pass' required >
+			        <label for="defaultForm-pass">Ingresa clave</label>
+			    </div>				
+			    <div class="text-center">
+			        <button type="submit" name="entrar" class="btn btn-default">Entrar</button>
+			    </div>			    
+			</form>
+		</div>
+
+
+
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/index2.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	</body>
 </html>
