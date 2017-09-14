@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
-import httplib, json
+import httplib, json, urllib
 class Http():
-    def __init__(self, host):
-        self.cnx = httplib.HTTPConnection(host)
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.name = "x"
 
     def post(self, url, body):
-        self.header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json"}
-        self.cnx.request('POST', url, body, self.header)
-        respuesta = self.cnx.getresponse()
-        if respuesta.status == 200:
-            return json.loads(respuesta.read())
+        try: cnx = httplib.HTTPConnection(self.host+":"+self.port)
+        except: return -1
+        header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json"}
+        cnx.request('POST', url, urllib.urlencode({self.name:json.dumps(body)}), header)
+        response = cnx.getresponse()
+        if response.status == 200:
+            try: result = json.loads(response.read())
+            except: result = -1
         else:
-            return -1
-
-    def Close(self):
-        return self.cnx.close()
+            result = -1
+        cnx.close()
+        return result
