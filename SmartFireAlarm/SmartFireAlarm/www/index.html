@@ -1,4 +1,4 @@
-OCTYPE html>
+﻿OCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -21,37 +21,64 @@ OCTYPE html>
 					</div>
 				</div>
 				<ul class="nav navbar-nav collapse navbar-collapse no-border" id="navBar">
-					<li><a onclick="ocultar()" href ="#" id="inicio">Inicio</a></li>   
-                    <li><a href="#" id="configuracion">Configuracion</a></li>
-                    <li><a href="#" id="cuenta">Cuenta</a></li>
-					<li><a onclick="Login1()" href="#" id="desconectar">Desconectar</a></li>
-					<li><a onclick="Login1()" href="#" id="ingresar">Ingresar</a></li>
-                    
+					<li><a onclick ="Inicio()" href ="#" id ="Inicio"        >Inicio</a></li>   
+                    <li><a onclick ="Configuracion()" href ="#" id ="Configuracion" >Configuracion</a></li>
+                    <li><a onclick ="Cuenta()" href ="#" id ="Cuenta"        >Cuenta</a></li>
+					<li><a onclick ="Desconectar()" href ="#" id ="Desconectar"   >Desconectar</a></li>            
 				</ul>
 			</div>
 		</div>
-		<div class="container b-color-3 color-0 fillHeight" id="mainContainer">
-			<h1>Welcome</h1>
-			<p>
-				inf
-			</p>
-		</div>
-		<div id="copyr" class="copyright">
-			<p class="hCenter">&copy; 2017 FireAlert</p>
+
+
+		<div class="container b-color-3 color-0 fillHeight" id="Alertas_form">
+			<h1>Alertas</h1>
+            <table style="width:100%">
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                </tr>
+                <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+                </tr>
+            </table>
 		</div>
 
 
-		<div id="contenedor" class="div01">
+        <div class="container b-color-3 color-0 fillHeight" id="conf_form">
+            <h1>Configuracion</h1>
+            <p>
+                inf
+            </p>
+        </div>
+
+        <div class="container b-color-3 color-0 fillHeight" id="Cuenta_form">
+            <h1>Cuenta</h1>
+            <p>
+                inf
+            </p>
+        </div>
+
+		
+
+		<div id="Login" class="div01">
 			<form action='index.php' method='post'>
 			    <p class="h5 text-center mb-4">Iniciar Sesion</p>
 			    <div class="md-form">
 			        <i class="fa fa-envelope prefix grey-text"></i>
-			        <input type="text" id="defaultForm-email" class="form-control" name='nom'  autofocus>
+			        <input type="text" id="user_login" class="form-control" name='user'  autofocus>
 			        <label for="defaultForm-email">Ingresa usuario</label>
 			    </div>
 			    <div class="md-form">
 			        <i class="fa fa-lock prefix grey-text"></i>
-			        <input type="password" id="defaultForm-pass" class="form-control" name='pass' required >
+			        <input type="password" id="pass_login" class="form-control" name='pass' required >
 			        <label for="defaultForm-pass">Ingresa clave</label>
 			    </div>				
 			    <div class="text-center">
@@ -60,6 +87,9 @@ OCTYPE html>
 			</form>
 		</div>
 
+        <div id="copyright" class="copyright">
+            <p class="hCenter">&copy; 2017 FireAlert</p>
+        </div>
 
 
 		<script type="text/javascript" src="cordova.js"></script>
