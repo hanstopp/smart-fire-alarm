@@ -3,7 +3,7 @@ local ssidTemp=string.format("%s%s%s",string.sub(str,10,11),string.sub(str,13,14
 
 cfg={}
 cfg.ssid="MCU"..ssidTemp
-cfg.pwd="jpk.5332";
+cfg.pwd="12345678";
 wifi.ap.config(cfg)
 
 cfg={}
@@ -20,8 +20,12 @@ collectgarbage();
 srv=net.createServer(net.TCP)
 srv:listen(80,function(conn)
     conn:on("receive",function(client,request)
-        print(request)
-        client:send("{\"campo1\":\"valor1\"}")
+        local vars = strig.match(request,"\r\n\r\n(.*)")
+        if vars.volumen > 40 then
+        	client:send("{\"campo1\":\"valor1\"}")
+        else
+        	client:send("{\"campo2\":\"valor2\"}")
+        end
     end)
     
     conn:on("sent",function(client)

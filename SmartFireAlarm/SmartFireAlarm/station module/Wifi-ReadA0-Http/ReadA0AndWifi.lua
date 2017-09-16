@@ -1,8 +1,9 @@
+dofile("credential.lua");
 
 WifiConnected = function(T)
 	print("Conexion a ("..T.SSID..") establecida!")
   	print("Esperando la direccion IP...")
-	if dCount ~= nil then dCount = nil
+	if dCount ~= nil then dCount = nil end
 end
 
 WifiIpObtenida = function(T)
@@ -59,8 +60,13 @@ mSeg = 3000
 if adc.force_init_mode(adc.INIT_ADC) then 
 	node.restart()
 	return
-
+end
+dCount = 0
 tmr.alarm(0, mSeg, 1, function ()
     Value = adc.read(0)
+    dCount = dCount + 1
     print("El Valor Leido es (mV):"..Value)
+    if dCount == 10 then
+        tmr.stop(0)
+    end
 end)
