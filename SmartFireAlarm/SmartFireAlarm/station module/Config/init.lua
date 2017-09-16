@@ -1,21 +1,30 @@
-wifi.setmode(wifi.STATION)
-wifi.sta.config("MCU001","mcu001")
-srv = net.createServer(net.TCP)
+local str=wifi.ap.getmac();
+local ssidTemp=string.format("%s%s%s",string.sub(str,10,11),string.sub(str,13,14),string.sub(str,16,17));
+
+cfg={}
+cfg.ssid="MCU"..ssidTemp
+cfg.pwd="jpk.5332";
+wifi.ap.config(cfg)
+
+cfg={}
+cfg.ip="192.168.1.1";
+cfg.netmask="255.255.255.0";
+cfg.gateway="192.168.1.1"
+wifi.ap.setip(cfg);
+wifi.setmode(wifi.SOFTAP)
+
+str=nil
+ssidTemp=nil
+collectgarbage();
+
+srv=net.createServer(net.TCP)
 srv:listen(80,function(conn)
     conn:on("receive",function(client,request)
-        
-        local buff = "";
-        buff = buff.."<h1>Configuración</h1>";
-        buff = buff.."<form>";
-        buff = buff.."<table>"; -- aqui iria la lista de redes. necesito saber como hacer scan
-        buff = buff.."<tr><td><input type=\"radio\" name=\"red\" value=\"RED1\"></td><td>RED1</td></tr>";
-        buff = buff.."<tr><td><input type=\"radio\" name=\"red\" value=\"RED1\"></td><td>RED2</td></tr>";
-        buff = buff.."</table>";
-        buff = buff.."<input type=\"password\" name=\"pass\">";
-        buff = buff.."</form>";
-
-        client:send(buf);
-        client:close();
-        collectgarbage();
+        print(request)
+        client:send("{\"campo1\":\"valor1\"}")
     end)
-end
+    
+    conn:on("sent",function(client)
+    	client:close() 
+    end)
+end)
