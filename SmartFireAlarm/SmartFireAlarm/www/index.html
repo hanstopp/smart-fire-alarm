@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿OCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -8,10 +8,11 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" href="css/palette.css">
+		<link rel="stylesheet" href="css/mdb.css">
 		<title>FireAlarm</title>
 	</head>
 	<body>
-		<div role="navigation" class="navbar navbar-default b-color-0 color-3 no-border">
+		<div role="navigation" class="navbar navbar-default b-color-0 color-3 no-border" id="navigation-nanvas">
 			<div class="container no-border">
 				<div class="navbar-header no-border">
                     <p class="navbar-brand color-3" id="logo">Logo</p>
@@ -20,48 +21,80 @@
 					</div>
 				</div>
 				<ul class="nav navbar-nav collapse navbar-collapse no-border" id="navBar">
-					<li><a href="index.php">Home</a></li>   
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown">Art
-						<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-						  <li><a href="art/digital.php">Digital</a></li>
-						  <li><a href="art/traditional.php">Traditional</a></li>
-						  <li><a href="art/sketchbook.php">Sketchbook</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown">Design
-						<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-						  <li><a href="design/logo.php">Logo</a></li>
-						  <li><a href="design/posters.php">Posters</a></li>
-						  <li><a href="design/products.php">Products</a></li>
-						</ul>
-					</li>
-					<li><a href="about.php">About</a></li>
-					<li><a href="contact.php">Contact</a></li>
+					<li><a onclick ="Inicio()" href ="#" id ="Inicio"        >Inicio</a></li>   
+                    <li><a onclick ="Configuracion()" href ="#" id ="Configuracion" >Configuracion</a></li>
+                    <li><a onclick ="Cuenta()" href ="#" id ="Cuenta"        >Cuenta</a></li>
+					<li><a onclick ="Desconectar()" href ="#" id ="Desconectar"   >Desconectar</a></li>            
 				</ul>
 			</div>
 		</div>
-		<div class="container b-color-3 color-0 fillHeight" id="mainContainer">
-			<h1>Welcome</h1>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-		</div>
-		<div class="copyright">
-			<p class="hCenter">&copy; 2017 Matias Poblete</p>
+
+
+		<div class="container b-color-3 color-0 fillHeight" id="Alertas_form">
+			<h1>Alertas</h1>
+            <table style="width:100%">
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                </tr>
+                <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+                </tr>
+            </table>
 		</div>
 
+
+        <div class="container b-color-3 color-0 fillHeight" id="conf_form">
+            <h1>Configuracion</h1>
+            <p>
+                inf
+            </p>
+        </div>
+
+        <div class="container b-color-3 color-0 fillHeight" id="Cuenta_form">
+            <h1>Cuenta</h1>
+            <p>
+                inf
+            </p>
+        </div>
+
+		
+
+		<div id="Login" class="div01">
+			<form action='index.php' method='post'>
+			    <p class="h5 text-center mb-4">Iniciar Sesion</p>
+			    <div class="md-form">
+			        <i class="fa fa-envelope prefix grey-text"></i>
+			        <input type="text" id="user_login" class="form-control" name='user'  autofocus>
+			        <label for="defaultForm-email">Ingresa usuario</label>
+			    </div>
+			    <div class="md-form">
+			        <i class="fa fa-lock prefix grey-text"></i>
+			        <input type="password" id="pass_login" class="form-control" name='pass' required >
+			        <label for="defaultForm-pass">Ingresa clave</label>
+			    </div>				
+			    <div class="text-center">
+			        <button type="submit" name="entrar" class="btn btn-default">Entrar</button>
+			    </div>			    
+			</form>
+		</div>
+
+        <div id="copyright" class="copyright">
+            <p class="hCenter">&copy; 2017 FireAlert</p>
+        </div>
+
+
 		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	</body>
 </html>
