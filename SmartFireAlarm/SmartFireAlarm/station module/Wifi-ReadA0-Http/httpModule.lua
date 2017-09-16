@@ -1,9 +1,9 @@
 --Modulo HTTP
 function httpPost(url, datos)
-	data = sjson.encode(datos)
+	datos = sjson.encode(datos)
 	http.post(url, 
 		"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json", 
-		data,
+		datos,
 		function (code, data)
 			if code < 0 then
 				print("La Peticion Fallo!")
