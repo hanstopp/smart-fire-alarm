@@ -1,5 +1,6 @@
 <?php
 	if($_POST){
+		session_start();
 		if(isset($_POST["type"])){
 			$decode= json_decode($_POST["type"]);
 			$type=$decode->{'type'};
@@ -13,6 +14,8 @@
 		  				$stmt = $con->prepare('SELECT * FROM user WHERE name= :nombre AND passswd= :clave');
 		  				$rows = $stmt->execute(array(':nombre'   => $nom, ':clave' => $pas));
 		  				if($rows>0){
+		  					$fila= $stmt->fetch(); 
+		  					$_SESSION["code"]=$fila[0];
 		  					$var= array('estado'=>'exito');
 		  					echo json_encode($var);
 		  				}
@@ -20,10 +23,13 @@
 		  					$var= array('estado'=>'fail');
 		  					echo json_encode($var);
 		  				}
-					} 
+					}
 					catch(PDOException $e) {
-		  			echo 'Error conectando con la base de datos: ' . $e->getMessage();
+		  				echo 'Error conectando con la base de datos: ' . $e->getMessage();
 		  			}
+					break;
+				case "logout":
+					unset($_SESSION["code"]); //elimina la session del codigo de usuario
 					break;
 				case "notification":
 					$user=$_SESSION["usuario"];
@@ -33,7 +39,8 @@
 		  				$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		  				$stmt = $con->prepare('SELECT code FROM incident WHERE user= :nombre AND time < :last');
 		  				$rows = $stmt->execute(array(':nombre'   => $user, ':last' => $lastRecv));
-		  				if($rows>0){
+		  				if($rows>0){.{-
+		  				}
 		  					$fila= $stmt->fetch(); 
 		  					$var= array('notifica'=> $fila[0]);
 		  					echo json_encode($var);
@@ -42,12 +49,12 @@
 		  					$var= array('notifica'=>'null');
 		  					echo json_encode($var);
 		  				}
-					} 
+					}
 					catch(PDOException $e) {
 		  			echo 'Error conectando con la base de datos: ' . $e->getMessage();
 		  			}
 					break;
 			}
 		}
-	}	
+	}
 ?>
