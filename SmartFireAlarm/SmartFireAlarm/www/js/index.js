@@ -62,20 +62,3 @@ function Login() {
 
 
 }
-/*
-no tomar en cuenta
-function selectRedes() {
-    $(document).ready(function () {
-        $.ajax({
-            type: 'POST',
-            url: 'php/cargar_redes.php'
-        })
-            .done(function (listas_rep) {
-                $('#lista_redes').html(listas_rep)
-            })
-            .fail(function () {
-                alert('Hubo un errror al cargar las listas_rep')
-            })
-
-    })
-}*/

@@ -53,20 +53,10 @@
 
 
         <div class="container b-color-3 color-0 fillHeight" id="conf_form">
-            <form method='post'>
-                <div class="col-md-4">
-                    <p>
-                        Seleccione red de conexion NodeMCU
-                        <select id="lista_redes" name="lista_redes" class="form-control"></select>
-                    </p>
-                    <br>
-                    <p>
-                        <label for="pwd">Password</label>
-                        <input type="password" class="form-control" id="pwd_login_formulario">
-                    </p>
-                    <button type="submit" class="btn btn-default" id="submit_formulario" onclick="">Ingresar</button>
-                </div>
-            </form>
+            <h1>Configuracion</h1>
+            <p>
+                inf
+            </p>
         </div>
 
         <div class="container b-color-3 color-0 fillHeight" id="Cuenta_form">
@@ -76,31 +66,35 @@
             </p>
         </div>
 
+		
 
-        <div class="container" id="Login">
-            <p>Iniciar Sesion</p>
-            <form  method='post'>
-                <div class="form-group">
-                    <label for="text">Usuario</label>
-                    <input type="text" class="form-control" id="usuario_login">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password</label>
-                    <input type="password" class="form-control" id="pwd_login">
-                </div>
-                <button type="submit" class="btn btn-default" id="submit_login" onclick="">Ingresar</button>
-            </form>
-        </div>
-
+		<div id="Login" class="div01">
+			<form action='index.php' method='post'>
+			    <p class="h5 text-center mb-4">Iniciar Sesion</p>
+			    <div class="md-form">
+			        <i class="fa fa-envelope prefix grey-text"></i>
+			        <input type="text" id="user_login" class="form-control" name='user'  autofocus>
+			        <label for="defaultForm-email">Ingresa usuario</label>
+			    </div>
+			    <div class="md-form">
+			        <i class="fa fa-lock prefix grey-text"></i>
+			        <input type="password" id="pass_login" class="form-control" name='pass' required >
+			        <label for="defaultForm-pass">Ingresa clave</label>
+			    </div>				
+			    <div class="text-center">
+			        <button type="submit" name="entrar" class="btn btn-default">Entrar</button>
+			    </div>			    
+			</form>
+		</div>
 
         <div id="copyright" class="copyright">
-             <p class="hCenter">&copy; 2017 FireAlert</p>
+            <p class="hCenter">&copy; 2017 FireAlert</p>
         </div>
 
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-</body>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	</body>
 </html>
