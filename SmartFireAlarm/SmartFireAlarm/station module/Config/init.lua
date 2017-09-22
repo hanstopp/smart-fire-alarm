@@ -7,25 +7,24 @@ Connected = false
 
 if file.exists("credential.lua") then
     dofile("credential.lua")
+    print(SSID)
+    print(PASSWORD)
+    wifi.eventmon.register(wifi.eventmon.STA_CONNECTED, WifiConnected)
+    wifi.eventmon.register(wifi.eventmon.STA_GOT_IP, WifiIpObtenida)
+    wifi.eventmon.register(wifi.eventmon.STA_DISCONNECTED, Desconexion)
+
     wifi.setmode(wifi.STATION)
     wifi.sta.config({ssid=SSID, pwd=PASSWORD})
 
-    nCount = 0
-
-    tmr.alarm(0, 1000, 1, function()
-        if wifi.sta.getip() == nil and nCount < 10 then
+    for i=1,10 do
+        if wifi.sta.getip() == nil then
             print("Conectando...\n")
-            nCount = nCount + 1
+            tmr.delay(1000)
         else
-            if wifi.sta.getip() ~= nil then
-                Connected = true
-            end
-            tmr.stop(0)
+            Connected = true
+            break
         end
-    end)
-
-    nCount = nil
-    collectgarbage()
+    end
 end
 
 if not Connected then
@@ -72,7 +71,6 @@ if not Connected then
                     -- node.restart() or goto line1
                 elseif args.mcu_action == "get_adc" then
                     client:send("{\"Value\":\""..adc.read(0).."\",\"Message\":\"Success\"}")
-                end
                 else
                     client:send("{\"ERROR\":\"NilReturn\",\"Message\":\"The action is not recognized\"}")
                 end
