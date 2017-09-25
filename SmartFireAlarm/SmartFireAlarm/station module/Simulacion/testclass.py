@@ -18,22 +18,38 @@ def main():
     pygame.display.set_caption("Simulador de dispositivo")
     scr_rect = screen.get_rect()
     btn_rect = pygame.Rect(100,100,200,100)
-    index = '/test/index.php'
+    index = ''
     cnx1 = http.Http(HOST,PORT)
     lok = True
+    params = {
+        'mcu_action':'get_ip'
+    }                   
+    response = cnx1.post(index, params)
+    print response
     while lok:
         for event in pygame.event.get():
             if event.type == QUIT:
+
                 lok = False
             if event.type == MOUSEBUTTONUP:
                 mousex, mousey = event.pos
                 if btn_rect.left < mousex and mousex < btn_rect.right and btn_rect.top < mousey and mousey < btn_rect.bottom:
                 #----------------funcionamiento principal------------------------------
                     params = {
-                        'hora': time.strftime("%H:%M:%S"),
-                        'tanque': ra.choice(['T1','T2','T3','T4']),
-                        'volumen': ra.randint(0,113000)/1000.
-                    }					
+                        'mcu_action':'get_adc'
+                    }
+                    response = cnx1.post(index, params)
+                    print response
+                    params = {
+                        'mcu_action':'get_ip'
+                    }
+                    response = cnx1.post(index, params)
+                    print response
+                    params = {
+                        'srv_action':'set_user',
+                        'user':'Andres',
+                        'pwd':'12345678'
+                    }
                     response = cnx1.post(index, params)
                     print response
                 #--------------------------------------------------------------
