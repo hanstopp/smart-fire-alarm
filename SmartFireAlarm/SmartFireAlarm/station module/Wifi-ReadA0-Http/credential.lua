@@ -1,2 +1,0 @@
-SSID="Priscila";
-PASSWORD="114201140";
