@@ -50,7 +50,11 @@ srv:listen(80,function(conn)
             elseif args.mcu_action == "get_adc" then
                 client:send("{\"Value\":"..adc.read(0)..",\"Message\":\"Success\"}")
             elseif args.mcu_action == "get_ip" then
-                client:send("{\"Value\":\""..wifi.sta.getip().."\",\"Message\":\"Success\"}")
+                if wifi.sta.getip() ~= nil then
+                    client:send("{\"Value\":\""..wifi.sta.getip().."\",\"Message\":\"Success\"}")
+                else
+                    client:send('{"ERROR":"NilReturn","Message":"NodeMCU is not Connected"}')
+                end
             else
                 client:send("{\"ERROR\":\"NilReturn\",\"Message\":\"The action is not recognized\"}")
             end
@@ -58,17 +62,18 @@ srv:listen(80,function(conn)
             if wifi.sta.getip() ~= nil then
                 if args.srv_action == "set_user" then
                     http.post("http://pillan.inf.uct.cl/~aflores/test.php",
-                        "Content-Type: application/json\r\n",
-                        args, function (code, data)
+                        "Content-Type: application/x-www-form-urlencoded\r\nAccept: application/json\r\n",
+                        sjson.encode(args), function (code, data)
                             if code < 0 then
                                 client:send("{\"ERROR\":\"PostError\",\"Message\":\"No se pudo realizar el post\"}")
                             else
-                                if sjson.decode(data).Error ~= nil then
+                                if sjson.decode(data).Error == nil then
                                     file.remove("user.json")
                                     if file.open("user.json","w+") then
                                         file.writeline(data)
                                         file.close()
                                     end
+                                    client:send(data)
                                 else
                                     client:send(data)
                                 end
@@ -81,7 +86,7 @@ srv:listen(80,function(conn)
                 client:send("{\"ERROR\":\"NilReturn\",\"Message\":\"NodeMCU is not Connected\"}")
             end
         else
-            client:send("{\"ERROR\":\"NilReturn\",\"Message\":\"None is Returned\"}")
+            client:send("{\"ERROR\":\"NilReturn\",\"Message\":\"None is returned\"}")
         end
     end)
     conn:on("sent",function(client)
