@@ -40,11 +40,11 @@ srv:listen(80,function(conn)
         ---------- mcu_action receive ----------
         if args.mcu_action ~= nil then
             if args.mcu_action == "set_credential" then
-                client:send(set_credential(args))
+                client:send(mcu_action.set_credential(args))
             elseif args.mcu_action == "get_adc" then
-                client:send(get_adc())
+                client:send(mcu_action.get_adc())
             elseif args.mcu_action == "get_ip" then
-                client:send(get_ip())
+                client:send(mcu_action.get_ip())
             else
                 client:send('{"ERROR":"NilReturn","Message":"The action is not recognized"}')
             end
@@ -54,7 +54,7 @@ srv:listen(80,function(conn)
         elseif args.srv_action ~= nil then
             if wifi.sta.getip() ~= nil then
                 if args.srv_action == "set_user" then
-                    client:send(set_user(args))
+                    client:send(srv_action.set_user(args))
                 else
                     client:send('{"ERROR":"NilReturn","Message":"The action is not recognized"}')
                 end
