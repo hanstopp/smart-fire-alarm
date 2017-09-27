@@ -18,7 +18,7 @@ net.dns.setdnsserver("8.8.4.4", 1)
 cfg = {ssid = ""}
 if file.exists("credential.json") then
     if file.open("credential.json") then
-        cfg = sjson.decode(file.read())
+        cfg = cjson.decode(file.read())
         file.close()
     end
 end
@@ -34,7 +34,7 @@ srv:listen(80,function(conn)
         ---------- get post args ----------
         local args = string.match(request,"\r\n\r\n(.*)")
         if args == "" then args="{}" end
-        args = sjson.decode(args)
+        args = cjson.decode(args)
         -----------------------------------
 
         ---------- mcu_action receive ----------

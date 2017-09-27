@@ -4,7 +4,7 @@ local srv_action = {}
 
 local function set_user(dict)
     local request = httpModule.httpPost('http://pillan.inf.uct.cl/~aflores/test.php',dict)
-    if sjson.decode(request).ERROR == nil then
+    if cjson.decode(request).ERROR == nil then
         file.remove("user.json")
         if file.open("user.json","w+") then
             file.writeline(data)

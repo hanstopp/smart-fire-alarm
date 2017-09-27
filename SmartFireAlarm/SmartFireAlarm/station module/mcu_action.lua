@@ -11,7 +11,7 @@ local function set_credential(dict)
         file.writeline(str)
         file.close()
         wifi.sta.disconnect()
-        wifi.sta.config(sjson.decode(str))
+        wifi.sta.config(cjson.decode(str))
         wifi.sta.connect()
         return '{"Message":"success"}'
     else
