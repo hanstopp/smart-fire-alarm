@@ -45,6 +45,9 @@ srv:listen(80,function(conn)
                 client:send(mcu_action.get_adc())
             elseif args.mcu_action == "get_ip" then
                 client:send(mcu_action.get_ip())
+            elseif args.mcu_action == "get_networks" then
+                wifi.sta.getap(mcu_action.getNetworks)
+                client:send(mcu_action.nets)
             else
                 client:send('{"ERROR":"NilReturn","Message":"The action is not recognized"}')
             end

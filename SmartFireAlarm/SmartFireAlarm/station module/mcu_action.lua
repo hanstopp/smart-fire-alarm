@@ -1,4 +1,36 @@
 local mcu_action = {}
+local httpModule = require('httpModule')
+
+local function getNerworks(T)
+    if wifi.getmode() == wifi.STATIONAP then
+        local list = '{'
+        local newList = {}
+        local i = 0
+        for k,v in pairs(T) do
+            table.insert(newList, k)
+        end
+        for i,k in ipairs(newList) do
+            if i == table.maxn(newList) then
+                list = list..'"'.. i-1 ..'" : "'..k..'"'
+            else
+                list = list..'"'.. i-1 ..'" : "'..k..'" ,'
+            end
+        end
+        list = list..'}'
+        mcu_action.nets = list
+        print(list)
+    else
+        print("ERROR")
+    end
+    -- Aqui el POST al Servidor (En progreso)--
+    --local request = httpModule.httpPost('http://pillan.inf.uct.cl/~aflores/test.php',list)
+    --if cjson.decode(request).ERROR == nil then
+    --    print(cjson.decode(request))
+    --else
+    --    print(request)
+    --end
+    --print(list)
+end
 
 local function set_credential(dict)
     file.remove("credential.json")
@@ -34,5 +66,6 @@ end
 mcu_action.set_credential = set_credential
 mcu_action.get_adc = get_adc
 mcu_action.get_ip = get_ip
+mcu_action.netScan = getNetworks
 
 return mcu_action
