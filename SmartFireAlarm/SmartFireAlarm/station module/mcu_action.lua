@@ -1,5 +1,4 @@
 local mcu_action = {}
-local httpModule = require('httpModule')
 
 local function getNerworks(T)
     if wifi.getmode() == wifi.STATIONAP then
