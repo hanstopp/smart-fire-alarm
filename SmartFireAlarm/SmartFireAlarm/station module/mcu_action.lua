@@ -22,14 +22,6 @@ local function getNerworks(T)
     else
         print("ERROR")
     end
-    -- Aqui el POST al Servidor (En progreso)--
-    --local request = httpModule.httpPost('http://pillan.inf.uct.cl/~aflores/test.php',list)
-    --if cjson.decode(request).ERROR == nil then
-    --    print(cjson.decode(request))
-    --else
-    --    print(request)
-    --end
-    --print(list)
 end
 
 local function set_credential(dict)
