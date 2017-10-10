@@ -22,8 +22,8 @@ if file.exists("credential.json") then
         file.close()
     end
 end
-wifi.sta.config(cfg)
-wifi.sta.connect()
+--wifi.sta.config(cfg)
+--wifi.sta.connect()
 ----------------------------------------------
 
 ---------- Server listener ----------
@@ -46,8 +46,7 @@ srv:listen(80,function(conn)
             elseif args.mcu_action == "get_ip" then
                 client:send(mcu_action.get_ip())
             elseif args.mcu_action == "get_networks" then
-                wifi.sta.getap(mcu_action.getNetworks)
-                client:send(mcu_action.nets)
+                client:send(mcu_action.get_networks())
             else
                 client:send('{"ERROR":"NilReturn","Message":"The action is not recognized"}')
             end

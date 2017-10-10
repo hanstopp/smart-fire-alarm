@@ -1,25 +1,23 @@
 local mcu_action = {}
 
-local function getNerworks(T)
+local function get_networks()
+    newList = {}
     if wifi.getmode() == wifi.STATIONAP then
-        local list = '{'
-        local newList = {}
-        local i = 0
-        for k,v in pairs(T) do
-            table.insert(newList, k)
-        end
-        for i,k in ipairs(newList) do
-            if i == table.maxn(newList) then
-                list = list..'"'.. i-1 ..'" : "'..k..'"'
-            else
-                list = list..'"'.. i-1 ..'" : "'..k..'" ,'
+        wifi.sta.getap(function(T)
+            local i = 0
+            for k,v in pairs(T) do
+                newList[i] = k
+                i = i + 1
             end
+            stri = newList
+        end)
+        if stri ~= nil then
+            return cjson.encode(stri)
+        else
+            return '{"Error":"NilReturn", "Message":"None is return"}'
         end
-        list = list..'}'
-        mcu_action.nets = list
-        print(list)
     else
-        print("ERROR")
+        return '{"ERROR":"NilReturn","Message":"WifiStationAP not established"}'
     end
 end
 
@@ -57,6 +55,6 @@ end
 mcu_action.set_credential = set_credential
 mcu_action.get_adc = get_adc
 mcu_action.get_ip = get_ip
-mcu_action.netScan = getNetworks
+mcu_action.get_networks = get_networks
 
 return mcu_action
