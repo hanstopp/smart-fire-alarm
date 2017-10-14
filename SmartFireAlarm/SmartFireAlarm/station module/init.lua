@@ -11,19 +11,20 @@ end
 
 ---------- wifi and net init config ----------
 wifi.setmode(wifi.STATIONAP)
-wifi.ap.config({ssid = "MCU_001"})
+math.randomseed(tmr.time())
+wifi.ap.config({ssid = "MCU_"..math.random(0,9)..math.random(0,9)..math.random(0,9)..""})
 wifi.ap.setip({ip = "192.168.1.1", netmask = "255.255.255.0", gateway = "192.168.1.1"})
+wifi.ap.dhcp.config({start = "192.168.1.100"})
+wifi.ap.dhcp.start()
 net.dns.setdnsserver("8.8.8.8", 0)
 net.dns.setdnsserver("8.8.4.4", 1)
-cfg = {ssid = ""}
 if file.exists("credential.json") then
     if file.open("credential.json") then
-        cfg = cjson.decode(file.read())
+        wifi.sta.config(cjson.decode(file.read()))
+        wifi.sta.connect()
         file.close()
     end
 end
---wifi.sta.config(cfg)
---wifi.sta.connect()
 ----------------------------------------------
 
 ---------- Server listener ----------
@@ -34,19 +35,20 @@ srv:listen(80,function(conn)
         ---------- get post args ----------
         local args = string.match(request,"\r\n\r\n(.*)")
         if args == "" then args="{}" end
+        print(args)
         args = cjson.decode(args)
         -----------------------------------
 
         ---------- mcu_action receive ----------
         if args.mcu_action ~= nil then
             if args.mcu_action == "set_credential" then
-                client:send(mcu_action.set_credential(args))
+                mcu_action.set_credential(client,args)
             elseif args.mcu_action == "get_adc" then
-                client:send(mcu_action.get_adc())
+                mcu_action.get_adc(client)
             elseif args.mcu_action == "get_ip" then
-                client:send(mcu_action.get_ip())
+                mcu_action.get_ip(client)
             elseif args.mcu_action == "get_networks" then
-                client:send(mcu_action.get_networks())
+                mcu_action.get_networks(client)
             else
                 client:send('{"ERROR":"NilReturn","Message":"The action is not recognized"}')
             end

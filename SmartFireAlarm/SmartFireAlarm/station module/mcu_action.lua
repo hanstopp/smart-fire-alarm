@@ -1,29 +1,30 @@
 local mcu_action = {}
 
-local function get_networks()
-    newList = {}
+local function get_networks(client)
     if wifi.getmode() == wifi.STATIONAP then
+        local list = '{}'
         wifi.sta.getap(function(T)
+            list = '{'
             local i = 0
             for k,v in pairs(T) do
-                newList[i] = k
+                list = list..'"'..i..'"'..':'..'"'..k..'",'
                 i = i + 1
             end
-            stri = newList
+            list = string.sub(list,1,-2)..'}'
+            if list ~= nil then
+                client:send(list)
+            else
+                client:send('{"ERROR":"NilReturn", "Message":"None is return"}')
+            end
         end)
-        if stri ~= nil then
-            return cjson.encode(stri)
-        else
-            return '{"Error":"NilReturn", "Message":"None is return"}'
-        end
     else
-        return '{"ERROR":"NilReturn","Message":"WifiStationAP not established"}'
+        client:send('{"ERROR":"NilReturn","Message":"WifiStationAP not established"}')
     end
 end
 
-local function set_credential(dict)
+local function set_credential(client,dict)
     file.remove("credential.json")
-    if file.open("credential.json") then
+    if file.open("credential.json", "w+") then
         local str = '{"ssid":"'..dict.ssid..'"'
         if dict.pwd ~= nil then
             str = str..',"pwd":"'..dict.pwd..'"'
@@ -34,21 +35,21 @@ local function set_credential(dict)
         wifi.sta.disconnect()
         wifi.sta.config(cjson.decode(str))
         wifi.sta.connect()
-        return '{"Message":"success"}'
+        client:send('{"Message":"success"}')
     else
-        return '{"ERROR":"NilFile","Message":"Error has occurred while trying to manipulate the file"}'
+        client:send('{"ERROR":"nilFile","Message":"Error has occurred while trying to manipulate the file"}')
     end
 end
 
-local function get_adc()
-    return '{"Value":'..adc.read(0)..',"Message":"Success"}'
+local function get_adc(client)
+    client:send('{"Value":'..adc.read(0)..',"Message":"Success"}')
 end
 
-local function get_ip()
+local function get_ip(client)
     if wifi.sta.getip() ~= nil then
-        return '{"Value":"'..wifi.sta.getip()..'","Message":Success}'
+        client:send('{"Value":"'..wifi.sta.getip()..'","Message":"Success"}')
     else
-        return '{"ERROR":"NilReturn","Message":"NodeMCU is not Connected"}'
+        client:send('{"ERROR":"NilReturn","Message":"NodeMCU is not Connected"}')
     end
 end
 
