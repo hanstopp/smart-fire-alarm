@@ -3,6 +3,11 @@ local mcu_action = require('mcu_action')
 local srv_action = require('srv_action')
 -----------------------------
 
+---------- clean ----------
+wifi.ap.dhcp.stop()
+collectgarbage()
+---------------------------
+
 ---------- adc init config ----------
 if adc.force_init_mode(adc.INIT_ADC) then 
     node.restart()
@@ -15,9 +20,10 @@ math.randomseed(tmr.time())
 wifi.ap.config({ssid = "MCU_"..math.random(0,9)..math.random(0,9)..math.random(0,9)..""})
 wifi.ap.setip({ip = "192.168.1.1", netmask = "255.255.255.0", gateway = "192.168.1.1"})
 wifi.ap.dhcp.config({start = "192.168.1.100"})
-wifi.ap.dhcp.start()
 net.dns.setdnsserver("8.8.8.8", 0)
 net.dns.setdnsserver("8.8.4.4", 1)
+wifi.ap.dhcp.start()
+
 if file.exists("credential.json") then
     if file.open("credential.json") then
         wifi.sta.config(cjson.decode(file.read()))

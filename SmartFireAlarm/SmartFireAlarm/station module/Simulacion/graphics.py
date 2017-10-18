@@ -44,6 +44,14 @@ class Panel():
         self.get_adc_rect = self.get_adc_image.get_rect()
         self.get_adc_rect.center = (75,40)
 
+        # set_user_image
+        self.set_user_image = pygame.Surface((100,30))
+        self.set_user_image.fill((100,100,100))
+        ti, tr = text("set_user",50,15)
+        self.set_user_image.blit(ti,tr)
+        self.set_user_rect = self.set_user_image.get_rect()
+        self.set_user_rect.center = (275,40)
+
         # get_ip_image
         self.get_ip_image = pygame.Surface((100,30))
         self.get_ip_image.fill((100,100,100))
@@ -77,6 +85,7 @@ class Panel():
         self.update_rect.center = (75,280)
 
         self.image.blit(self.get_adc_image,self.get_adc_rect)
+        self.image.blit(self.set_user_image,self.set_user_rect)
         self.image.blit(self.get_ip_image,self.get_ip_rect)
         self.image.blit(self.get_networks_image,self.get_networks_rect)
         self.image.blit(self.set_credential_image,self.set_credential_rect)
@@ -97,6 +106,7 @@ class Panel():
     def update(self):
         self.image.fill((200,200,200))
         self.image.blit(self.get_adc_image,self.get_adc_rect)
+        self.image.blit(self.set_user_image,self.set_user_rect)
         self.image.blit(self.get_ip_image,self.get_ip_rect)
         self.image.blit(self.get_networks_image,self.get_networks_rect)
         self.image.blit(self.set_credential_image,self.set_credential_rect)

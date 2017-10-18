@@ -52,6 +52,14 @@ def main():
                     print response
                 elif panel.update_rect.left <= x and x <= panel.update_rect.right and panel.update_rect.top <= y and y <= panel.update_rect.bottom:
                     panel.update()
+                elif panel.set_user_rect.left <= x and x <= panel.set_user_rect.right and panel.set_user_rect.top <= y and y <= panel.set_user_rect.bottom:
+                    params = {
+                        'srv_action':'set_user',
+                        'user':'aflores',
+                        'pwd':'12345678'
+                    }
+                    response = cnx1.post(index, params)
+                    print response
                 #--------------------------------------------------------
         screen.blit(panel.image,(0,0))
         pygame.display.flip()

@@ -9,7 +9,6 @@ class Http():
         try:
             cnx = httplib.HTTPConnection(self.host+":"+self.port)
         except Exception, e:
-            print e
             return -1
         header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json"}
         try:
@@ -17,16 +16,13 @@ class Http():
             response = cnx.getresponse()
             if response.status == 200:
                 data = response.read()
-                print "<"+data+">"
                 try:
                     result = json.loads(data)
                 except Exception, e:
-                    print e
                     result = -2
             else:
                 result = -1
             cnx.close()
             return result
         except Exception, e:
-            print e
             return -1
