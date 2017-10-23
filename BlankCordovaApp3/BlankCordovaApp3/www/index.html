@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        Personalice la directiva de seguridad de contenido en la etiqueta meta como sea necesario. Agregue "unsafe-inline" a default-src para permitir JavaScript insertado.
+        Para obtener más detalles, consulte http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+        <!---<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>BlankCordovaApp3</title>
+    </head>
+    <body onload="myFunction()">
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Conectando con el dispositivo</p>
+                <p class="event received">El dispositivo está preparado</p>
+                <!--<button id="dialogAlert" onclick="myFunction()">ALERT</button>-->
+                <button onclick="myStopFunction()">CONFIRM</button>
+                <button id="dialogPrompt">PROMPT</button>
+                <button id="dialogBeep">BEEP</button>
+                <input  />
+            </div>
+            <div class="container b-color-3 color-0 fillHeight" id="loginCont">
+                <h2>Ingreso</h2>
+                <form class="form" id="loginForm">
+                    <input type="hidden" name="type" value="login">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" class="form-control" id="email" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd">Password:</label>
+                        <input type="password" name="passwd" class="form-control" id="passwd" required="required">
+                    </div>
+                    <button type="submit" class="btn btn-default">Log in</button>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
+    </body>
+</html>
